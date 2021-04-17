@@ -6,23 +6,13 @@
     </head>
     <body>
         <div id="container">
-            <div class="buttons">
-                <button id="1">rock</button>
-                <button id="2">paper</button>
-                <button id="3">scissors</button>
-            </div>
-            <div class="results">
-
-            </div>
-
+            <button id="rock">rock</button>
+            <button id="paper">paper</button>
+            <button id="scissors">scissors</button>
         </div>
-       
+            
 
-
-
-
-
-
+    
 
         <script>
             function computerPlay(){
@@ -38,110 +28,134 @@
             }
             
             function round(playerSelection){
-                // var playerSelection = (prompt());
-                // playerSelection = playerSelection.toLowerCase();
 
                 var computerSelection = computerPlay();
 
-               
 
                 var win;
 
+                const content = document.createElement('div');
+                content.classList.add('content');
+
                 if (playerSelection === "rock" && computerSelection === "scissors"){
-                    console.log("you win, rock beats scissors");
-  
-                    content.classList.add('results');
-                    content.textContent = 'you win';
+                    //console.log("you win, rock beats scissors");
+                    content.textContent = "you win, rock beats scissors";
+                    container.appendChild(content);
+                
                     win = 1;
+                    return win;
                 }
                 else if (playerSelection === "scissors" && computerSelection === "rock"){
-                    console.log("you lose, rock beats scissors");
+                    //console.log("you lose, rock beats scissors");
+                    content.textContent = "you lose, rock beats scissors";
+                    container.appendChild(content);
+                 
                     win = 2;
+                    return win;
                 }
                 else if (playerSelection === "paper" && computerSelection === "rock"){
-                    console.log("you win, rock beats scissors");
+                    //console.log("you win, rock beats scissors");
+                    content.textContent = "you win, rock beats scissors";
+                    container.appendChild(content);
+                   
                     win = 1;
+                    return win;
                 }
                 else if (playerSelection === "rock" && computerSelection === "paper"){
-                    console.log("you lose, paper beats rock");
-                    const results = document.createElement('div');
-                    results.textContent = 'you lose, paper beats rock';
+                    //console.log("you lose, paper beats rock");
+                    content.textContent = "you lose, paper beats rock";
+                    container.appendChild(content);
+                  
                     win = 2;
+                    return win;
                 }
                 else if (playerSelection === "scissors" && computerSelection === "paper"){
-                    console.log("you win, scissors beats paper");
+                    //console.log("you win, scissors beats paper");
+                    content.textContent = "you win, scissors beats paper";
+                    container.appendChild(content);
+                 
                     win = 1;
+                    return win;
                 }
                 else if (playerSelection === "paper" && computerSelection === "scissors"){
-                    console.log("you lose, scissors beats paper");
+                    //console.log("you lose, scissors beats paper");
+                    content.textContent = "you lose, scissors beats paper";
+                    container.appendChild(content);
+                 
                     win = 2;
+                    return win;;
                 }
                 else {
-                    console.log("tie, throw again");
-                    const results = document.createElement('div');
-                    results.textContent = 'tie, throw again';
+                    //console.log("tie, throw again");
+                    content.textContent = "tie, throw again";
+                    container.appendChild(content);
                     win = 3;
+                    return win;
                 }
-                return win;
             }
-
-            function game(){
-                var player_score = 0;
-                var computer_score = 0;
-                // for (i = 0; i < 5; i++){
-                //     win = round();
-                //     if (win === 1){
-                //         player_score++;
-                //     }
-                //     else if (win === 2){
-                //         computer_score++;
-                //     }
-                //     else {
-                //         // do nothing
-                //     }
-                // }
-
-                // if (player_score > computer_score) {
-                //     console.log("you win: " + player_score + " " + "to " + computer_score);
-                // }
-                // else if (computer_score > player_score) {
-                //     console.log("you lose: " + computer_score + " " + "to "  + player_score);
-                // }
-                // else if (player_score === computer_score) {
-                //     console.log("you tied: " + player_score +  " " + "to " + computer_score);
-                // }
-                
-            }
-        
-
 
             //new code for buttons
-            const buttons = document.querySelectorAll('button');
+            var win;
+            var playerScore = 0;
+            var compScore = 0;
 
+            const buttons = document.querySelectorAll('button');
             buttons.forEach((button) => {
                 button.addEventListener('click', () => {
-                    if (button.id == 1){
+                    
+                    const selection = document.createElement('div');
+                    selection.classList.add('selection');
+                    
+                    if (button.id == "rock"){
                         playerSelection = "rock";
-                        console.log(playerSelection);
-                        round(playerSelection);
+                   
+                        selection.textContent = playerSelection;
+                        container.appendChild(selection);
+                        
+                        win = round(playerSelection);
                     }
-                    if (button.id == 2){
+                    if (button.id == "paper"){
                         playerSelection = "paper";
-                        console.log(playerSelection);
-                        round(playerSelection);
+                  
+                        selection.textContent = playerSelection;
+                        container.appendChild(selection);
+                        
+                        win = round(playerSelection)
                     }
-                    if (button.id == 3){
+                    if (button.id == "scissors"){
                         playerSelection = "scissors";
-                        console.log(playerSelection);
-                        round(playerSelection);
+
+                        selection.textContent = playerSelection;
+                        container.appendChild(selection);
+                        
+                        win = round(playerSelection)
+                    }
+                    
+                    const results = document.createElement('div');
+                    results.classList.add('results');
+
+                    if (win === 1){
+                    playerScore++;
+                    }
+                    else if (win === 2){
+                    compScore++;
+                    }
+                    else {
+                        // do nothing
+                    }
+                    
+                    results.textContent = playerScore + " " + compScore;
+                    container.appendChild(results);
+
+                    if (playerScore == 5 ){
+                        alert("WINNER!");
+                    }
+                    if (compScore == 5 ){
+                        alert("LOSER!");
                     }
                 })
             })
-
-//
-            //game();
-            // round();
-
+ 
         </script>
     </body>
 </html>
